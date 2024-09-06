@@ -212,7 +212,7 @@ public class CustomLerp : MonoBehaviour
     }
     
     // Lerps a UI Element
-    IEnumerator TweenUI(RectTransform rect, TweenType type , Vector3 to, float time)
+    public IEnumerator TweenUI(RectTransform rect, TweenType type , Vector3 to, float time)
     {
         float t = 0;
 
