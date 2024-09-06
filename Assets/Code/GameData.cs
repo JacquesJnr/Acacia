@@ -65,4 +65,6 @@ public class GameData : MonoBehaviour
             }
         }
     }
+
+    public int matches;
 }

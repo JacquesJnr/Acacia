@@ -44,13 +44,14 @@ public class GameManager : MonoBehaviour
 
         if (newState == GameState.Reset)
         {
-            StartCoroutine(SetStateOnDelay(1,GameState.None));
+            StartCoroutine(SetStateOnDelay(0.5f,GameState.None));
+            StartCoroutine(SetStateOnDelay(1,GameState.Game));
         }
     }
 
-    IEnumerator SetStateOnDelay(int delay, GameState state)
+    IEnumerator SetStateOnDelay(float delay, GameState state)
     {
         yield return new WaitForSeconds(delay);
-        SetGameState(GameState.None);
+        SetGameState(state);
     }
 }

@@ -9,19 +9,24 @@ public class UI_CardBehavior : MonoBehaviour
 {
    private RectTransform rect;
    public Button button;
-   public TMP_Text name;
+   public TMP_Text ID_tag;
    public bool flipped;
+   
+   public bool isFaceUp => button.interactable && !flipped;
+   public bool isFaceDown => button.interactable && flipped;
 
    private void OnEnable()
    {
       rect = GetComponent<RectTransform>();
-      StartCoroutine(FlipOnDelay());
+      DelayedFlip(initialFlipDelay);
    }
 
    [Header("Animation Control")]
    [SerializeField] private float initialFlipDelay;
    [SerializeField] private float animationSpeed;
    [SerializeField] private float flipSpeed;
+
+   #region Card Flip Logic
 
    public void Flip()
    {
@@ -37,12 +42,28 @@ public class UI_CardBehavior : MonoBehaviour
          flipped = false;
       }
    }
+   
+   public void DelayedFlip(float delay)
+   {
+      StartCoroutine(FlipOnDelay(delay));
+   }
+   
+   IEnumerator FlipOnDelay(float delay)
+   {
+      yield return new WaitForSeconds(delay);
+      
+      Flip();
+      button.interactable = true;
+   }
+   #endregion
+
+   #region Mouse Events
 
    public void MouseClick()
    {
       Flip();
    }
-
+   
    public void MouseEnter()
    {
       if(!button.interactable){return;}
@@ -59,16 +80,17 @@ public class UI_CardBehavior : MonoBehaviour
       CustomLerp.Instance.UI_Scale(rect, Vector3.one, animationSpeed, false);
    }
 
-   public void SetInteractable(bool state)
+   #endregion
+   
+   public void OnMatched(float delay)
    {
-      button.interactable = state;
+      button.interactable = false;
+      StartCoroutine(ShrinkOnDelay(delay));
    }
 
-   IEnumerator FlipOnDelay()
+   IEnumerator ShrinkOnDelay(float delay)
    {
-      yield return new WaitForSeconds(initialFlipDelay);
-      
-      Flip();
-      button.interactable = true;
+      yield return new WaitForSeconds(delay);
+      CustomLerp.Instance.UI_Scale(rect, Vector3.zero, animationSpeed, false);
    }
 }

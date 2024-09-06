@@ -16,7 +16,8 @@ public enum TweenType
 {
     translate,
     scale,
-    rotate
+    rotate,
+    alpha
 }
 
 public class CustomLerp : MonoBehaviour
@@ -183,7 +184,8 @@ public class CustomLerp : MonoBehaviour
         StartCoroutine(TweenUI(rect, TweenType.rotate, to, time));
     }
     #endregion
-
+    
+    # region LerpCoroutines
     // Lerps a Non-UI GameObject
     private IEnumerator Tween(GameObject g, TweenType type , Vector3 to, float time)
     {
@@ -238,6 +240,9 @@ public class CustomLerp : MonoBehaviour
         
         SetComplete(rect, type, to);
     }
+    # endregion
+
+    #region Coroutine Completers
 
     // Ensure GameObject Lerp Completion
     private void SetComplete(GameObject g ,TweenType type, Vector3 to)
@@ -276,4 +281,7 @@ public class CustomLerp : MonoBehaviour
                 break;
         }
     }
+
+    #endregion
+    
 }

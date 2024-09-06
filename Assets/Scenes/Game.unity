@@ -328,6 +328,7 @@ GameObject:
   - component: {fileID: 833964719}
   - component: {fileID: 833964720}
   - component: {fileID: 833964721}
+  - component: {fileID: 833964722}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -392,6 +393,20 @@ MonoBehaviour:
   rows: 3
   gameGrid: {fileID: 1329108006}
   cardPrefab: {fileID: 5902615595016559702, guid: a5b32ee6a8595f540b0a9b5a6d0df8b2, type: 3}
+  matches: 0
+--- !u!114 &833964722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833964717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2af359cefbf3f954e87cd5ff28f3f01d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  matchIds: 
 --- !u!1 &861144274
 GameObject:
   m_ObjectHideFlags: 0
