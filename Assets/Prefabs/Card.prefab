@@ -436,11 +436,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 0
+  Matched: 0
   frontImage: {fileID: 5902615596065991756}
   backImage: {fileID: 5902615595806869391}
-  ButtonBehavior: {fileID: 0}
-  autoUnflip: 0
-  autoFlipAfterSeconds: 3
+  ButtonBehavior: {fileID: 5902615594181404667}
+  indexer: {fileID: 5712937537326474896}
 --- !u!114 &5712937537326474896
 MonoBehaviour:
   m_ObjectHideFlags: 0

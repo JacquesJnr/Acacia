@@ -389,11 +389,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7c1821a35989a046a5fdc58de05180c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  columns: 4
-  rows: 3
+  columns: 2
+  rows: 2
+  matches: 0
   gameGrid: {fileID: 1329108006}
   cardPrefab: {fileID: 5902615595016559702, guid: a5b32ee6a8595f540b0a9b5a6d0df8b2, type: 3}
-  matches: 0
 --- !u!114 &833964722
 MonoBehaviour:
   m_ObjectHideFlags: 0

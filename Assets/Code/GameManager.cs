@@ -44,8 +44,9 @@ public class GameManager : MonoBehaviour
 
         if (newState == GameState.Reset)
         {
-            StartCoroutine(SetStateOnDelay(0.5f,GameState.None));
-            StartCoroutine(SetStateOnDelay(1,GameState.Game));
+            FileManager.DeleteSaveFile("SaveData.dat");
+            StartCoroutine(SetStateOnDelay(1f,GameState.None));
+            StartCoroutine(SetStateOnDelay(1.1f,GameState.Game));
         }
     }
 

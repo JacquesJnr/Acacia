@@ -12,6 +12,12 @@ public class GameCards : MonoBehaviour
         cards.Add(card);
     }
 
+    public void AddFromLoad(Card card)
+    {
+        cards.Add(card);
+        card.LoadFromSaveData(GameManager.Instance.GetSaveData.loadData);
+    }
+
     public void Clear()
     {
         foreach (Card card in cards)
@@ -28,6 +34,7 @@ public class GameCards : MonoBehaviour
             if (card.ID == id)
             {
                 card.ButtonBehavior.OnMatched(0.5f);
+                card.Matched = true;
             }
         }
     }

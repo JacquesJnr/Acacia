@@ -45,6 +45,11 @@ public class UI_CardBehavior : MonoBehaviour
    
    public void DelayedFlip(float delay)
    {
+      if (!button.enabled)
+      {
+         return;
+      }
+
       StartCoroutine(FlipOnDelay(delay));
    }
    
@@ -53,7 +58,10 @@ public class UI_CardBehavior : MonoBehaviour
       yield return new WaitForSeconds(delay);
       
       Flip();
-      button.interactable = true;
+      if (button != null)
+      {
+         button.interactable = true;
+      }
    }
    #endregion
 
@@ -66,7 +74,7 @@ public class UI_CardBehavior : MonoBehaviour
    
    public void MouseEnter()
    {
-      if(!button.interactable){return;}
+      if(!button.interactable || button == null){return;}
       
       // Lerp - Scale up when hovered.
       CustomLerp.Instance.UI_Scale(rect, new Vector3(1.1f, 1.1f, 1f), animationSpeed, false);
@@ -74,7 +82,7 @@ public class UI_CardBehavior : MonoBehaviour
 
    public void MouseExit()
    {
-      if(!button.interactable){return;}
+      if(!button.interactable || button == null){return;}
       
       // Lerp - Scale to normal size when unhovered.
       CustomLerp.Instance.UI_Scale(rect, Vector3.one, animationSpeed, false);
