@@ -36,16 +36,6 @@ public class CardMatch : MonoBehaviour
         matchIds.Clear();
     }
     
-    public void RemoveDuplicates(int id)
-    {
-        for (int i = 0; i < matchIds.Count; i++)
-        {
-            if (matchIds[i] == id)
-            {
-                matchIds.RemoveAt(i);
-            }
-        }
-    }
 
     public void ClearMatches()
     {

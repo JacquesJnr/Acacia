@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -45,6 +46,8 @@ public class GameManager : MonoBehaviour
     public CardMatch GetCardMatcher => _cardMatcher;
     public Score GetScore => _score;
 
+    public List<Sprite> cardImages;
+    
     public void SetGameState(GameState newState)
     {
         state = newState;
@@ -52,7 +55,6 @@ public class GameManager : MonoBehaviour
 
         if (newState == GameState.Reset)
         {
-            ResetTable();
             RestartGame(1);
         }
 
@@ -65,12 +67,12 @@ public class GameManager : MonoBehaviour
     public void RestartGame(float delay)
     {
         StartCoroutine(SetStateOnDelay(GameState.Game, delay));
-        ResetTable();
     }
 
     IEnumerator SetStateOnDelay(GameState state, float delay)
     {
         yield return new WaitForSeconds(delay);
+        ResetTable();
         SetGameState(state);
     }
 

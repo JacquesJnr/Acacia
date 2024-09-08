@@ -27,11 +27,23 @@ public class Score : MonoBehaviour
     private void OnEnable()
     {
         CardMatch.OnMatch += IncreaseScore;
+        GameManager.OnStateChanged += OnGameStateChanged;
 
         score.text = CurrentScore.ToString();
     }
     
-    public int CalulateNewScore(int score, int comboIncrease) => (CurrentScore + score) * comboIncrease;
+    private void OnGameStateChanged(GameState state)
+    {
+        if (state == GameState.Reset)
+        {
+            //CurrentScore = 0;
+            combo = 1;
+            comboTimer = -1;
+            comboMeter.fillAmount = 0;
+        }
+    }
+
+    public int CalulateNewScore(int score, int comboIncrease) => CurrentScore + (score * comboIncrease);
 
     private void IncreaseScore(int id)
     {

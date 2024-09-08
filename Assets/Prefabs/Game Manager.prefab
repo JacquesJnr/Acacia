@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8812721713668448564
+--- !u!1 &2341152146460072035
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,12 +8,13 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8812721713668448567}
-  - component: {fileID: 8812721713668448566}
-  - component: {fileID: 8812721713668448553}
-  - component: {fileID: 8812721713668448552}
-  - component: {fileID: 8812721713668448555}
-  - component: {fileID: 8812721713668448554}
+  - component: {fileID: 2341152146460072032}
+  - component: {fileID: 2341152146460072033}
+  - component: {fileID: 2341152146460072062}
+  - component: {fileID: 2341152146460072063}
+  - component: {fileID: 2341152146460072060}
+  - component: {fileID: 2341152146460072061}
+  - component: {fileID: 2341152146460072001}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -21,14 +22,14 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8812721713668448567
+--- !u!4 &2341152146460072032
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8812721713668448564}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GameObject: {fileID: 2341152146460072035}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -36,76 +37,117 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8812721713668448566
+--- !u!114 &2341152146460072033
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8812721713668448564}
+  m_GameObject: {fileID: 2341152146460072035}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30c400856f66f814084695744e3f6d90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
---- !u!114 &8812721713668448553
+  cardImages:
+  - {fileID: 21300000, guid: 4d8a570ae4dddd1439829fb4e1fb06c6, type: 3}
+  - {fileID: 21300000, guid: ccd425f507e8931458a1dcd4a7022bd5, type: 3}
+  - {fileID: 21300000, guid: 24ece15a4e706da4dafc328039d5000a, type: 3}
+  - {fileID: 21300000, guid: 8a2ed5014c734f543a85e6a589b17aed, type: 3}
+  - {fileID: 21300000, guid: d9ff7454e454a1c439bddfb0394475de, type: 3}
+  - {fileID: 21300000, guid: 570a1f094d77b7b4bb5fc148a99f1a7e, type: 3}
+  - {fileID: 21300000, guid: 5ed56bc5991c4fb46986cb4c6f79edee, type: 3}
+  - {fileID: 21300000, guid: 4b19f49fcfedf0d4bb5276af36390e56, type: 3}
+  - {fileID: 21300000, guid: 74856e27695f56640b8cce69dcb9b312, type: 3}
+  - {fileID: 21300000, guid: 29a35f6f842527247ae2c83a779cad01, type: 3}
+  - {fileID: 21300000, guid: b153c362ab72de845a7087d8c90a3a4d, type: 3}
+  - {fileID: 21300000, guid: 4e12016abac88d5439042d7d0050e71a, type: 3}
+  - {fileID: 21300000, guid: b8a873be736c9074081b41c0d411852e, type: 3}
+  - {fileID: 21300000, guid: 01437b3b7114836479b68cd2fbbb5420, type: 3}
+  - {fileID: 21300000, guid: a993322afdd1884439b9acf2117d84c3, type: 3}
+  - {fileID: 21300000, guid: c78136ddf21b3564591bc427f484a7f2, type: 3}
+  - {fileID: 21300000, guid: 3c9dc9cf922b184469ca0c9ab6c90743, type: 3}
+  - {fileID: 21300000, guid: 348eb1f872cf4244f9d082342b9f1665, type: 3}
+--- !u!114 &2341152146460072062
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8812721713668448564}
+  m_GameObject: {fileID: 2341152146460072035}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7c1821a35989a046a5fdc58de05180c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  columns: 1
-  rows: 1
+  columns: 2
+  rows: 2
   gameGrid: {fileID: 0}
   cardPrefab: {fileID: 5902615595016559702, guid: a5b32ee6a8595f540b0a9b5a6d0df8b2, type: 3}
   loadData:
     matches: 0
     rows: 0
     columns: 0
+    score: 0
     cardData: []
   matches: 0
---- !u!114 &8812721713668448552
+--- !u!114 &2341152146460072063
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8812721713668448564}
+  m_GameObject: {fileID: 2341152146460072035}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39ad6b7fe0426b44d8c26e3a13044d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cards: []
---- !u!114 &8812721713668448555
+--- !u!114 &2341152146460072060
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8812721713668448564}
+  m_GameObject: {fileID: 2341152146460072035}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2af359cefbf3f954e87cd5ff28f3f01d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   matchIds: 
---- !u!114 &8812721713668448554
+--- !u!114 &2341152146460072061
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8812721713668448564}
+  m_GameObject: {fileID: 2341152146460072035}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: efdee559ed41de64bb9619b2e1cc7750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2341152146460072001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2341152146460072035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d75ad467f9d81a478e4a6c36ddb687a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseScoreIncrease: 30
+  score: {fileID: 0}
+  matches: {fileID: 0}
+  comboAmmount: {fileID: 0}
+  combo: 1
+  comboIncrease: 0
+  comboTimer: 0
+  comboDuration: 10
+  comboMeter: {fileID: 0}

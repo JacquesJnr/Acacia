@@ -1,5 +1,5 @@
 using System;
-using System.Security.Cryptography;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +9,7 @@ public class Card : MonoBehaviour, ISaveable
 {
    public int ID;
    public bool Matched;
-
+   
    [Header("Card Front")]
    public Image frontImage;
 
@@ -27,7 +27,8 @@ public class Card : MonoBehaviour, ISaveable
       ButtonBehavior = GetComponentInChildren<UI_CardBehavior>();
       indexer = GetComponent<AssignRandomIndex>();
       
-      ButtonBehavior.ID_tag.text = ID.ToString();
+      //ButtonBehavior.ID_tag.text = ID.ToString();
+      frontImage.sprite = GameManager.Instance.cardImages[ID-1];
    }
 
    private void OnEnable()

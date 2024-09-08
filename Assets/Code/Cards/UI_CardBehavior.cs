@@ -9,7 +9,7 @@ public class UI_CardBehavior : MonoBehaviour
 {
    private RectTransform rect;
    public Button button;
-   public TMP_Text ID_tag;
+   //public TMP_Text ID_tag;
    public bool flipped;
    
    public bool isFaceUp => button.interactable && !flipped;
