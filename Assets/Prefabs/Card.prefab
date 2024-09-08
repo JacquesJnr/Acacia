@@ -54,7 +54,7 @@ MonoBehaviour:
   button: {fileID: 5902615594779122263}
   ID_tag: {fileID: 5902615594410973031}
   flipped: 0
-  initialFlipDelay: 1
+  initialFlipDelay: 2
   animationSpeed: 0.2
   flipSpeed: 0.5
 --- !u!1 &5902615594410973025

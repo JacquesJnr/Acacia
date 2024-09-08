@@ -7,6 +7,7 @@ using UnityEngine;
 public class CardMatch : MonoBehaviour
 {
     [SerializeField] private List<int> matchIds;
+    
     public static event Action<int> OnMatch;
     public static event Action OnNoMatch;
 

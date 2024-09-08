@@ -38,10 +38,12 @@ public class GameManager : MonoBehaviour
     private GameCards _gameCards;
     private GameData _gameData;
     private CardMatch _cardMatcher;
+    private Score _score;
 
     public GameCards GetCardCollection => _gameCards;
     public GameData GetSaveData => _gameData;
     public CardMatch GetCardMatcher => _cardMatcher;
+    public Score GetScore => _score;
 
     public void SetGameState(GameState newState)
     {

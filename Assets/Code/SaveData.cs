@@ -22,6 +22,7 @@ public class SaveData
     public int matches;
     public int rows;
     public int columns;
+    public int score;
     public List<CardData> cardData = new List<CardData>();
 
     public string ToJson()

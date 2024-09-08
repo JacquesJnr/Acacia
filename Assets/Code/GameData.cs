@@ -39,6 +39,7 @@ public class GameData : MonoBehaviour, ISaveable
         saveData.matches = matches;
         saveData.rows = rows;
         saveData.columns = columns;
+        saveData.score = Score.GetScore;
         
         foreach (Card card in GameManager.Instance.GetCardCollection.cards)
         {
@@ -69,6 +70,7 @@ public class GameData : MonoBehaviour, ISaveable
         matches = saveData.matches;
         rows = saveData.rows;
         columns = saveData.columns;
+        Score.SetScore(saveData.score);
         
         loadData = saveData;
     }
@@ -160,6 +162,7 @@ public class GameData : MonoBehaviour, ISaveable
     private void OnCardMatched(int cardID)
     {
         ++matches;
+        //score = GameManager.Instance.GetScore.CalulateNewScore();
         
         if (matches >= maxCards / 2)
         {
