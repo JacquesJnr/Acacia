@@ -27,10 +27,12 @@ public class CardMatch : MonoBehaviour
         if (hasDuplicates)
         {
             OnMatch?.Invoke(id);
+            AudioManager.Instance.Play("Match");
         }
         else
         {
             OnNoMatch?.Invoke();
+            //AudioManager.Instance.Play("No Match");
         }
         
         matchIds.Clear();

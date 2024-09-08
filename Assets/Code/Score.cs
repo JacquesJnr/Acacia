@@ -16,7 +16,7 @@ public class Score : MonoBehaviour
 
     [Header("Combo System")]
     public int combo = 1;
-    public bool comboIncrease;
+    private bool audioSafety;
     public float comboTimer = 0;
     public float comboDuration = 10f;
     public Image comboMeter;
@@ -36,10 +36,16 @@ public class Score : MonoBehaviour
     {
         if (state == GameState.Reset)
         {
+            AudioManager.Instance.SetVolume("Combo Lost", 0);
             //CurrentScore = 0;
             combo = 1;
             comboTimer = -1;
             comboMeter.fillAmount = 0;
+        }
+
+        if (state == GameState.Game)
+        {
+            AudioManager.Instance.SetVolume("Combo Lost", 1);
         }
     }
 
@@ -50,6 +56,12 @@ public class Score : MonoBehaviour
         CurrentScore = CalulateNewScore(baseScoreIncrease, combo);
         comboTimer = comboDuration;
         ++combo;
+
+        if (combo >= 3)
+        {
+            AudioManager.Instance.Play("Combo Get");
+            audioSafety = true;
+        }
     }
 
     private void Update()
@@ -68,6 +80,11 @@ public class Score : MonoBehaviour
         {
             comboTimer = -1;
             combo = 1;
+            if (audioSafety)
+            {
+                AudioManager.Instance.Play("Combo Lost");
+                audioSafety = false;
+            }
         }
     }
     

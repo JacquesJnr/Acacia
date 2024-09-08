@@ -53,6 +53,11 @@ public class GameManager : MonoBehaviour
         state = newState;
         OnStateChanged?.Invoke(newState);
 
+        if (newState == GameState.Game)
+        {
+            AudioManager.Instance.Play("Game Start");
+        }
+
         if (newState == GameState.Reset)
         {
             RestartGame(1);

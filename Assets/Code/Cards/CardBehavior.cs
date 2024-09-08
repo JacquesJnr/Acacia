@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
-public class UI_CardBehavior : MonoBehaviour
+public class CardBehavior : MonoBehaviour
 {
    private RectTransform rect;
    public Button button;
@@ -58,24 +59,39 @@ public class UI_CardBehavior : MonoBehaviour
       yield return new WaitForSeconds(delay);
       
       Flip();
+     
       if (button != null)
       {
          button.interactable = true;
+      }
+
+      if (clicked)
+      {
+         AudioManager.Instance.SetPitch("No Match", Random.Range(0.9f, 1.1f));
+         AudioManager.Instance.Play("No Match");
       }
    }
    #endregion
 
    #region Mouse Events
 
+   private bool clicked;
+   
    public void MouseClick()
    {
       Flip();
+      AudioManager.Instance.SetPitch("Flip", Random.Range(0.9f, 1.1f));
+      AudioManager.Instance.Play("Flip");
+      clicked = true;
    }
    
    public void MouseEnter()
    {
       if(!button.interactable || button == null){return;}
       
+      AudioManager.Instance.SetPitch("Hover",Random.Range(0.8f, 1f));
+      AudioManager.Instance.Play("Hover");
+
       // Lerp - Scale up when hovered.
       CustomLerp.Instance.UI_Scale(rect, new Vector3(1.1f, 1.1f, 1f), animationSpeed, false);
    }

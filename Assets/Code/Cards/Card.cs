@@ -19,12 +19,12 @@ public class Card : MonoBehaviour, ISaveable
    public static event Action<int> OnCardShown;
 
    [Header("Componenets")]
-   public UI_CardBehavior ButtonBehavior;
+   public CardBehavior ButtonBehavior;
    public AssignRandomIndex indexer;
    
    private void Start()
    {
-      ButtonBehavior = GetComponentInChildren<UI_CardBehavior>();
+      ButtonBehavior = GetComponentInChildren<CardBehavior>();
       indexer = GetComponent<AssignRandomIndex>();
       
       //ButtonBehavior.ID_tag.text = ID.ToString();
