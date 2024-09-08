@@ -44,30 +44,28 @@ public class Card : MonoBehaviour, ISaveable
    public void PopulateSaveData(SaveData saveData)
    {
       SaveData.CardData myData = new SaveData.CardData();
+
       myData.id = ID;
       myData.isMatched = Matched;
       myData.siblingIndex = transform.GetSiblingIndex();
       saveData.cardData.Add(myData);
+      saveData.SortCardData();
    }
 
    public void LoadFromSaveData(SaveData saveData)
    {
       indexer.enabled = false;
-         
-      foreach (SaveData.CardData card in saveData.cardData)
-      {
-         if (card.siblingIndex == transform.GetSiblingIndex())
-         {
-            //transform.SetSiblingIndex(card.siblingIndex);
-            ID = card.id;
-            Matched = card.isMatched;
-         }
-      }
+      var cd = saveData.cardData;
+      int i = transform.GetSiblingIndex();
+
+      ID = cd[i].id;
+      Matched = cd[i].isMatched;
 
       if (Matched)
       {
-         Destroy(ButtonBehavior.button);
          ButtonBehavior.transform.localScale = Vector3.zero;
+         ButtonBehavior.button.interactable = false;
+         Destroy(ButtonBehavior.button);
       }
    }
 }

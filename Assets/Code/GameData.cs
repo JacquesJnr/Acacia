@@ -9,92 +9,20 @@ public class GameData : MonoBehaviour, ISaveable
     [SerializeField] [Range(1,6)]private int columns;
     [SerializeField][Range(1,6)] private int rows;
     int maxCards;
-    [SerializeField] private int matches;
 
-    public SaveData loadData;
+    public void SetRows(int r) => rows = r;
+    public int SetColumns(int c) => columns = c;
 
-    public int GetRows()
-    {
-        return rows;
-    }
-
-    public int GetColumns()
-    {
-        return columns;
-    }
-    
     public GridLayoutGroup gameGrid;
     public GameObject cardPrefab;
-
-    private void OnEnable()
-    {
-        // Subscribe to Events
-        GameManager.OnStateChanged += Setup;
-        CardMatch.OnMatch += OnCardMatched;
-        
-        maxCards = rows * columns;
-        gameGrid.constraintCount = columns;
-    }
     
-    // The collection of card data stored in the save file;
-    private List<Card> savedCardData;
-    
-    public void Setup(GameState state)
-    {
-        if(state == GameState.None){return;}
-        
-        if (state == GameState.Game)
-        {
-            
-            var id = 0;
-            // Instance Cards
-            for (int i = 0; i < maxCards; i++)
-            {
-                var obj = Instantiate(cardPrefab, gameGrid.transform);
-                var cardDetails = obj.GetComponent<Card>();
-                // Check for saves
-                if (!FileManager.LoadFromFile("SaveData.dat", out var json))
-                {
-                    // Increment ID
-                    if (i % 2 == 0)
-                    {
-                        id++;
-                    }
-                        
-                    // Assign IDs
-                    cardDetails.ID = id;
-                        
-                    // Add Cards to Card Collection
-                    GameManager.Instance.GetCardCollection.Add(cardDetails);
-                }
-                else
-                {
-                    LoadJsonData(this);
-                    GameManager.Instance.GetCardCollection.AddFromLoad(cardDetails);
-                }
-                
-                
-            }
-        }
-
-        if (state == GameState.Reset)
-        {
-            matches = 0;
-        }
-    }
-    
-    private void OnCardMatched(int cardID)
-    {
-        ++matches;
-        
-        if (matches >= maxCards / 2)
-        {
-            GameManager.Instance.SetGameState(GameState.Reset);
-        }
-    }
-
     #region Save
 
+    public void SaveGame()
+    {
+        SaveJsonData(this);
+    }
+    
     public static void SaveJsonData(GameData data)
     {
         SaveData sd = new SaveData();
@@ -133,6 +61,8 @@ public class GameData : MonoBehaviour, ISaveable
             Debug.Log("Load complete");
         }
     }
+    
+    public SaveData loadData;
 
     public void LoadFromSaveData(SaveData saveData)
     {
@@ -144,8 +74,109 @@ public class GameData : MonoBehaviour, ISaveable
     }
     #endregion
 
+    #region Delete
+
+    public void DeleteSaveData()
+    {
+        if(FileManager.LoadFromFile("SaveData.dat", out var json))
+        {
+            FileManager.DeleteSaveFile("SaveData.dat");
+        }
+    }
+
+    #endregion
+
+    private void OnEnable()
+    {
+        // Subscribe to Events
+        GameManager.OnStateChanged += OnGameStateChanged;
+        CardMatch.OnMatch += OnCardMatched;
+    }
+    
+    // The collection of card data stored in the save file;
+    private List<Card> savedCardData;
+    
+    
+    public void OnGameStateChanged(GameState state)
+    {
+        // Instance the game cards
+        if (state == GameState.Game)
+        {
+            // Destroy Any Existing Cards
+            GameManager.Instance.GetCardCollection.Clear();
+            foreach (Transform t in gameGrid.transform)
+            {
+                Destroy(t.gameObject);
+            }
+            
+            
+            var id = 0;
+            
+            // Get Layout Data
+            maxCards = rows * columns;
+            gameGrid.constraintCount = columns;
+            
+            for (int i = 0; i < maxCards; i++)
+            {
+                // Instance Cards
+                var obj = Instantiate(cardPrefab, gameGrid.transform);
+                var cardDetails = obj.GetComponent<Card>();
+                
+                // Check for no saves
+                if (!FileManager.LoadFromFile("SaveData.dat", out var json))
+                {
+                    // Increment ID
+                    if (i % 2 == 0)
+                    {
+                        id++;
+                    }
+                        
+                    // Assign Card IDs
+                    cardDetails.ID = id;
+                        
+                    // Add Cards to Card Collection
+                    GameManager.Instance.GetCardCollection.Add(cardDetails);
+                }
+                else
+                {
+                    // Load card data and add the cards to game card collection
+                    LoadJsonData(this);
+                    maxCards = rows * columns;
+                    gameGrid.constraintCount = columns;
+                    
+                    GameManager.Instance.GetCardCollection.AddFromLoad(cardDetails, rows * columns);
+                }
+            }
+        }
+
+        if (state == GameState.Reset)
+        {
+            loadData = null;
+        }
+    }
+    
+    public int matches;
+    
+    private void OnCardMatched(int cardID)
+    {
+        ++matches;
+        
+        if (matches >= maxCards / 2)
+        {
+            GameManager.Instance.SetGameState(GameState.Reset);
+            DeleteSaveData();
+            matches = 0;
+        }
+    }
+
     private void OnApplicationQuit()
     {
         SaveJsonData(this);
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnStateChanged -= OnGameStateChanged;
+        CardMatch.OnMatch -= OnCardMatched;
     }
 }

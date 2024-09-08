@@ -14,7 +14,6 @@ public class CardMatch : MonoBehaviour
     private void OnEnable()
     {
         Card.OnCardShown += OnCardShown;
-        GameManager.OnStateChanged += GameManagerOnOnStateChanged;
     }
 
     private void OnCardShown(int id)
@@ -26,12 +25,10 @@ public class CardMatch : MonoBehaviour
         
         if (hasDuplicates)
         {
-            Debug.Log("Match found!");
             OnMatch?.Invoke(id);
         }
         else
         {
-            Debug.Log("No Matches");
             OnNoMatch?.Invoke();
         }
         
@@ -48,12 +45,14 @@ public class CardMatch : MonoBehaviour
             }
         }
     }
-    
-    private void GameManagerOnOnStateChanged(GameState obj)
+
+    public void ClearMatches()
     {
-        if (obj == GameState.None)
-        {
-            matchIds.Clear();
-        }
+        matchIds.Clear();
+    }
+
+    private void OnDisable()
+    {
+        Card.OnCardShown -= OnCardShown;
     }
 }

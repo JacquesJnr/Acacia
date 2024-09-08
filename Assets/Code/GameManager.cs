@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public enum GameState
@@ -24,18 +25,23 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
     }
-
+    
     private void Start()
     {
         _gameCards = GetComponent<GameCards>();
         _gameData = GetComponent<GameData>();
+        _cardMatcher = GetComponent<CardMatch>();
+
+        SetGameState(GameState.Game);
     }
 
     private GameCards _gameCards;
     private GameData _gameData;
+    private CardMatch _cardMatcher;
 
     public GameCards GetCardCollection => _gameCards;
     public GameData GetSaveData => _gameData;
+    public CardMatch GetCardMatcher => _cardMatcher;
 
     public void SetGameState(GameState newState)
     {
@@ -44,15 +50,31 @@ public class GameManager : MonoBehaviour
 
         if (newState == GameState.Reset)
         {
-            FileManager.DeleteSaveFile("SaveData.dat");
-            StartCoroutine(SetStateOnDelay(1f,GameState.None));
-            StartCoroutine(SetStateOnDelay(1.1f,GameState.Game));
+            ResetTable();
+            RestartGame(1);
+        }
+
+        if (newState == GameState.None)
+        {
+            
         }
     }
 
-    IEnumerator SetStateOnDelay(float delay, GameState state)
+    public void RestartGame(float delay)
+    {
+        StartCoroutine(SetStateOnDelay(GameState.Game, delay));
+        ResetTable();
+    }
+
+    IEnumerator SetStateOnDelay(GameState state, float delay)
     {
         yield return new WaitForSeconds(delay);
         SetGameState(state);
+    }
+
+    public void ResetTable()
+    {
+        GetCardCollection.Clear();
+        GetSaveData.matches = 0;
     }
 }

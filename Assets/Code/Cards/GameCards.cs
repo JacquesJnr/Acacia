@@ -12,10 +12,17 @@ public class GameCards : MonoBehaviour
         cards.Add(card);
     }
 
-    public void AddFromLoad(Card card)
+    public void AddFromLoad(Card card, int maxCards)
     {
         cards.Add(card);
-        card.LoadFromSaveData(GameManager.Instance.GetSaveData.loadData);
+        
+        if (cards.Count == maxCards)
+        {
+            foreach (Card c in cards)
+            {
+                c.LoadFromSaveData(GameManager.Instance.GetSaveData.loadData);
+            }
+        }
     }
 
     public void Clear()
@@ -68,5 +75,12 @@ public class GameCards : MonoBehaviour
         {
             Clear();
         }
+    }
+
+    private void OnDisable()
+    {
+        GameManager.OnStateChanged -= OnStateChanged;
+        CardMatch.OnMatch -= ClearMatchedCards;
+        CardMatch.OnNoMatch -= FlipUpturned;
     }
 }

@@ -33,6 +33,11 @@ public class SaveData
     {
         JsonUtility.FromJsonOverwrite(JSON, this);
     }
+
+    public void SortCardData()
+    { 
+        cardData.Sort((x, y) => x.siblingIndex.CompareTo(y.siblingIndex));
+    }
 }
 
 public interface ISaveable
